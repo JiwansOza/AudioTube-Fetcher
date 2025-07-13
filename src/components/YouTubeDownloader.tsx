@@ -24,29 +24,8 @@ const YouTubeDownloader: React.FC = () => {
   const [url, setUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<DownloadResponse | null>(null);
-  const [scrollY, setScrollY] = useState(0);
-  const { toast } = useToast();
-  const [parallax, setParallax] = useState(0);
-  const prefersReducedMotion = useRef(false);
+  const { toast } = useToast(); // Restore toast hook
   const [activeTab, setActiveTab] = useState<'home' | 'convert' | 'about'>('home');
-
-  // Improved Parallax scroll effect
-  useEffect(() => {
-    prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion.current) return;
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setParallax(window.scrollY * 0.5);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Intersection Observer for section reveal
   const howItWorksRef = useRef<HTMLDivElement>(null);
@@ -55,11 +34,6 @@ const YouTubeDownloader: React.FC = () => {
   const [resultVisible, setResultVisible] = useState(false);
 
   useEffect(() => {
-    if (prefersReducedMotion.current) {
-      setHowItWorksVisible(true);
-      setResultVisible(true);
-      return;
-    }
     const observer = new window.IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -180,11 +154,7 @@ const YouTubeDownloader: React.FC = () => {
           <>
             {/* Hero Section */}
             <section className="relative flex flex-col items-center justify-center px-2 py-8">
-              <div
-                className="animate-parallax"
-                style={{ '--parallax-offset': prefersReducedMotion.current ? '0px' : `${parallax}px` } as React.CSSProperties}
-              >
-                <div className="w-full text-center max-w-full mx-auto space-y-8">
+              <div className="w-full text-center max-w-full mx-auto space-y-8">
                   {/* Logo and Title */}
                   <div className="space-y-6 animate-fade-in">
                     <div className="flex items-center justify-center gap-3">
@@ -244,7 +214,6 @@ const YouTubeDownloader: React.FC = () => {
                     </CardContent>
                   </Card>
                 </div>
-              </div>
             </section>
             {/* Result Section as bottom sheet on mobile (only in Home tab) */}
             {result && (
