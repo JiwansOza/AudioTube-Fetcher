@@ -176,12 +176,6 @@ const YouTubeDownloader: React.FC = () => {
             </div>
           )}
 
-          {/* API Key Notice */}
-          <div className="text-center p-4 rounded-lg bg-warning/10 border border-warning/20">
-            <p className="text-sm text-warning-foreground">
-              <strong>Note:</strong> Replace "YOUR_RAPIDAPI_KEY_HERE" with your actual RapidAPI key for the service to work.
-            </p>
-          </div>
         </CardContent>
       </Card>
     </div>
