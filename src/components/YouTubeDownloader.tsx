@@ -60,7 +60,7 @@ const YouTubeDownloader: React.FC = () => {
         `https://youtube-mp36.p.rapidapi.com/dl?id=${videoId}`,
         {
           headers: {
-            'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY_HERE',
+            'X-RapidAPI-Key': '4fb1134a93msh86b7223029cf8c6p1b9b89jsnf4c9c1af9073',
             'X-RapidAPI-Host': 'youtube-mp36.p.rapidapi.com'
           }
         }
