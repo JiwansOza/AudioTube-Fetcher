@@ -28,7 +28,7 @@ const YouTubeDownloader: React.FC = () => {
   const { toast } = useToast();
   const [parallax, setParallax] = useState(0);
   const prefersReducedMotion = useRef(false);
-  const [activeTab, setActiveTab] = useState<'home' | 'convert' | 'about'>('convert');
+  const [activeTab, setActiveTab] = useState<'home' | 'convert' | 'about'>('home');
 
   // Improved Parallax scroll effect
   useEffect(() => {
