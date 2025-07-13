@@ -66,6 +66,9 @@ const YouTubeDownloader: React.FC = () => {
         }
       );
 
+      console.log('API Response:', response.data);
+      console.log('API Status:', response.status);
+
       if (response.data.status === 'ok') {
         setResult(response.data);
         toast({
@@ -73,7 +76,8 @@ const YouTubeDownloader: React.FC = () => {
           description: `"${response.data.title}" is ready for download`,
         });
       } else {
-        throw new Error('Failed to process video');
+        console.log('API returned status:', response.data.status);
+        throw new Error(`API returned status: ${response.data.status}`);
       }
     } catch (error) {
       console.error('Download error:', error);
